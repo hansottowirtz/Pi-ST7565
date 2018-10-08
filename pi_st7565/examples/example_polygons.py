@@ -2,13 +2,15 @@ from time import sleep
 import os
 root = os.path.dirname(os.path.realpath(__file__))
 
-from xglcd_font import XglcdFont
+if __name__ == '__main__' and __package__ is None:
+    os.sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from pi_st7565.xglcd_font import XglcdFont
 
 if os.environ.get('MOCK_RPI') == 'true':
-    from soft_display import mock_gpio, Glcd
-    mock_gpio()
+    from pi_st7565.soft_display import Glcd
 else:
-    from st7565 import Glcd
+    from pi_st7565.st7565 import Glcd
 
 glcd = Glcd(rgb=[21, 20, 16])
 glcd.init()
@@ -16,7 +18,7 @@ glcd.set_backlight_color(0, 100, 0)
 x0, y0 = 40, 31
 rout, rmid, rin = 30, 20, 10
 incr = 2
-wendy = XglcdFont(root + '/fonts/Wendy7x8.c', 7, 8)
+wendy = XglcdFont(root + '/../../fonts/Wendy7x8.c', 7, 8)
 ship = glcd.load_bitmap(root + '/images/ship_38x29.raw',
                         width=38, height=29, invert=True)
 

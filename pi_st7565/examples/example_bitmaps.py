@@ -2,13 +2,12 @@ from pygame import time
 import os 
 root = os.path.dirname(os.path.realpath(__file__))
 
-from xglcd_font import XglcdFont
+from pi_st7565.xglcd_font import XglcdFont
 
 if os.environ.get('MOCK_RPI') == 'true':
-    from soft_display import mock_gpio, Glcd
-    mock_gpio()
+    from pi_st7565.soft_display import Glcd
 else:
-    from st7565 import Glcd
+    from pi_st7565.st7565 import Glcd
 
 clock = time.Clock()
 

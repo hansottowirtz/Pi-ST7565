@@ -9,7 +9,7 @@ import os
 import sys
 from shutil import rmtree
 
-from setuptools import find_packages, setup, Command
+from setuptools import setup, Command
 
 # Package meta-data.
 NAME = 'pi_st7565'
@@ -102,7 +102,7 @@ setup(
     # author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=find_packages(exclude=('tests',)),
+    packages=['pi_st7565'],
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
 

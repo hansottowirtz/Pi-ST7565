@@ -1,13 +1,12 @@
-""" This Module allows to test the programm and display output without running it on the Raspberry Pi.
+""" This Module allows to test the program and display output without running it on the Raspberry Pi.
 It uses pygame to render the display. The display is only updated on each flip(), just like the st7565.Glcd
-class. Therefor it might be unresponsive until the next flip() is called.
+class. Therefore it might be unresponsive until the next flip() is called.
 
 
 Usage:
     use soft_display.Glcd() instead of st7565.Glcd()
 
 """
-
 
 def mock_gpio():
     try:
@@ -25,10 +24,7 @@ def mock_gpio():
         patcher = patch.dict('sys.modules', modules)
         patcher.start()
 
-
-import pygame
 import st7565
-
 
 class Glcd(st7565.Glcd):
     BLACK = (0, 0, 0)
@@ -36,7 +32,11 @@ class Glcd(st7565.Glcd):
     ZOOM = 2
 
     def __init__(self, a0=24, cs=8, rst=25, rgb=None):
+        global pygame
+        import pygame
+
         mock_gpio()
+        
         super(Glcd, self).__init__(None, None, None, None)
 
         # Initialize the game engine
